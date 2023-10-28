@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# This script displays a string infinitely with a 2-second delay between each iteration.
+# A script displays a string infinitely with a 2-second delay between each iteration.
 # It creates a pid file in the var/ directory
-# It catches a SIGTERM signal and displays a text, deletes the created file then terminates itself.
-# It catches a SIGINT signal and displays a different text.
+# It catches a SIGTERM signal and displays a text, deletes the created file then terminates itself
 
 echo "$$" > /var/run/myscript.pid
 
