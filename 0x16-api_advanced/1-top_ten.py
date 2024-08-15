@@ -1,41 +1,37 @@
 #!/usr/bin/python3
-
 """
-Query Reddit API for titles of top ten posts of a given subreddit
+Script to print hot posts on a given Reddit subreddit.
 """
 
 import requests
 
 
 def top_ten(subreddit):
-    """
-    Prints the titles of the first 10 hot posts for a given subreddit.
+    """Print the titles of the 10 hottest posts on a given subreddit."""
+    # Construct the URL for the subreddit's hot posts in JSON format
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
 
-    Args:
-    - subreddit (str): The name of the subreddit.
-    Returns:
-    - None
-    """
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    # Ensure a custom User-Agent to prevent errors.
-    headers = {'User-Agent': 'My User Agent'}
+    # Define headers for the HTTP request, including User-Agent
+    headers = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+    }
 
-    try:
-        # Send GET request to Reddit API
-        response = requests.get(url, headers=headers)
-        # Parse response as JSON
-        data = response.json()
+    # Define parameters for the request, limiting the number of posts to 10
+    params = {
+        "limit": 10
+    }
 
-        # Check if 'data' key exists and 'children' key exists within it
-        if 'data' in data and 'children' in data['data']:
-            # Extract the first 10 posts
-            posts = data['data']['children'][:10]
-            # Print the titles of the posts
-            for post in posts:
-                print(post['data']['title'])
-        else:
-            # Print None if 'data' or 'children' key doesn't exist
-            print(None)
-    except requests.RequestException:
-        # Print None if there's any exception during the request
-        print(None)
+    # Send a GET request to the subreddit's hot posts page
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
+
+    # Check if the response status code indicates a not-found error (404)
+    if response.status_code == 404:
+        print("None")
+        return
+
+    # Parse the JSON response and extract the 'data' section
+    results = response.json().get("data")
+
+    # Print the titles of the top 10 hottest posts
+    [print(c.get("data").get("title")) for c in results.get("children")]
