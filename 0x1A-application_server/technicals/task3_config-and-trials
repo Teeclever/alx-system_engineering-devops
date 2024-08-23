@@ -1,0 +1,50 @@
+--- just to show some of the outputs I get and how confused i am at why the commands without :5000 or :5001 aren't working
+
+```sh
+ubuntu@444607-web-01:~/AirBnB_clone_v2$ pgrep gunicorn
+8140
+8143
+8146
+8149
+8301
+8303
+ubuntu@444607-web-01:~/AirBnB_clone_v2$ curl 127.0.0.1:5000/airbnb-onepage/
+Hello HBNB!ubuntu@444607-web-01:~/AirBnB_clone_v2$
+ubuntu@444607-web-01:~/AirBnB_clone_v2$ curl 127.0.0.1/airbnb-onepage/
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.18.0 (Ubuntu)</center>
+</body>
+</html>
+ubuntu@444607-web-01:~/AirBnB_clone_v2$ curl 127.0.0.1:5001/number_odd_or_even/6
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>Number: 6 is even</H1>
+    </BODY>
+</HTML>ubuntu@444607-web-01:~/AirBnB_clone_v2$ curl 127.0.0.1/airbnb-dynamic/number_odd_or_even/5
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.18.0 (Ubuntu)</center>
+</body>
+</html>
+ubuntu@444607-web-01:~/AirBnB_clone_v2$ curl 127.0.0.1:5001/number_odd_or_even/9
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>Number: 9 is odd</H1>
+    </BODY>
+</HTML>ubuntu@444607-web-01:~/AirBnB_clone_v2$
+```
+
+I'm tired.
